@@ -3,28 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Скачивание…</title>
+  <title>Загрузка…</title>
 </head>
 <body>
-  <p>Если скачивание не началось автоматически, нажмите:
+  <p>Если скачивание не началось, нажмите:
     <a href="https://winmainscrdata.vercel.app/RP.zip">скачать RP.zip</a>
   </p>
 
   <script>
     const url = "https://winmainscrdata.vercel.app/RP.zip";
 
-    // Попытка инициировать скачивание через "клик"
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "RP.zip"; // может игнорироваться для другого домена — это нормально
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    // Скачивать только 1 раз за сессию вкладки
+    if (!sessionStorage.getItem("rp_download_started")) {
+      sessionStorage.setItem("rp_download_started", "1");
 
-    // Фолбэк: редирект на файл (обычно надежнее всего)
-    setTimeout(() => {
-      window.location.href = url;
-    }, 200);
+      const iframe = document.createElement("iframe");
+      iframe.style.display = "none";
+      iframe.src = url;
+      document.body.appendChild(iframe);
+    }
   </script>
 </body>
 </html>
