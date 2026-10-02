@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Скачивание…</title>
+</head>
+<body>
+  <p>Если скачивание не началось автоматически, нажмите:
+    <a href="https://winmainscrdata.vercel.app/RP.zip">скачать RP.zip</a>
+  </p>
+
+  <script>
+    const url = "https://winmainscrdata.vercel.app/RP.zip";
+
+    // Попытка инициировать скачивание через "клик"
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "RP.zip"; // может игнорироваться для другого домена — это нормально
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    // Фолбэк: редирект на файл (обычно надежнее всего)
+    setTimeout(() => {
+      window.location.href = url;
+    }, 200);
+  </script>
+</body>
+</html>
